@@ -1,0 +1,6 @@
+prog:source/menu_principal.o main.o
+gcc -c princial.o main.o -o prog `sdl-config --cflags --libs` -lSDL_image -lSDL_mixer -lSDL_ttf
+main.o:main.c
+gcc -c main.o `sdl-config --cflags --libs` -lSDL_image -lSDL_mixer -lSDL_ttf
+menu_principal.o:source/menu_principal.c
+gcc -c menu_principal.c `sdl-config --cflags --libs` -lSDL_image -lSDL_mixer -lSDL_ttf
