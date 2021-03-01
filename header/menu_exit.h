@@ -3,6 +3,6 @@
 
 void affiche();
 
-void menu_exit();
+void menu_exit(int *continuer);
 
 #endif
