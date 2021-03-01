@@ -4,6 +4,7 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
 #include <SDL/SDL_ttf.h>
+#include "../header/menu_option.h"
 
 void affiche(){
 }
@@ -60,11 +61,11 @@ void menu_option(SDL_Surface *ecran,int *continuer,int *screen,Mix_Chunk *son,TT
    	    case SDL_MOUSEBUTTONDOWN:
    	        Mix_PlayChannel(1,son,0);
    	        SDL_GetMouseState(&x,&y);
-   	        if((x>300)&&(x<600)&&(y>400)&&(y<450)){
+   	        if((x>300)&&(x<600)&&(y>400)&&(y<450)&&(*screen==1)){
    	            *screen=2;
    	            full_screen(ecran);
    	        }
-   	        else if((x>650)&&(x<950)&&(y>400)&&(y<450)){
+   	        else if((x>650)&&(x<950)&&(y>400)&&(y<450)&&(*screen==2)){
    	            *screen=1;
    	            simple_screen(ecran);
    	        }
