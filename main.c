@@ -70,7 +70,7 @@ int main(){
                 if(event.key.keysym.sym==SDLK_j)
                 {
                     bouton(new_game1,option,Load,exit,ecran,&pos,&pos1,&pos2,&pos3);
-                    menu_newgame(ecran,&continuer,son_bouton);
+                    menu_newgame(ecran,&continuer,son_bouton,police,gris);
                 }
                 else if(event.key.keysym.sym==SDLK_o)
                 {
@@ -87,7 +87,7 @@ int main(){
                 Mix_PlayChannel(1,son_bouton,0);
                 SDL_GetMouseState(&x,&y);
             	if((x>450)&&(x<750)&&(y>250)&&(y<300)){
-		    menu_newgame(ecran,&continuer,son_bouton);
+		    menu_newgame(ecran,&continuer,son_bouton,police,gris);
             	}
             	else if((x>450)&&(x<750)&&(y>350)&&(y<400)&&(load)){
             	    //load
