@@ -66,13 +66,21 @@ int main(){
             	continuer = 0;
             	break;
             case SDL_KEYDOWN:
-                if(event.button.button == SDL_BUTTON_LEFT){
-                   SDL_BlitSurface(new_game1, NULL, ecran, &pos);
-            	    SDL_BlitSurface(option, NULL, ecran, &pos1);
-            	    SDL_BlitSurface(Load, NULL, ecran, &pos2);
-            	    SDL_BlitSurface(exit,NULL,ecran,&pos3);
-            	    SDL_BlitSurface(text,NULL,ecran,&pos_title);
-            	    SDL_Flip(ecran);
+                
+                if(event.key.keysym.sym==SDLK_j)
+                {
+                    bouton(new_game1,option,Load,exit,ecran,&pos,&pos1,&pos2,&pos3);
+                    menu_newgame(ecran,&continuer,son_bouton);
+                }
+                else if(event.key.keysym.sym==SDLK_o)
+                {
+                    bouton(new_game,option1,Load,exit,ecran,&pos,&pos1,&pos2,&pos3);
+                    menu_option(ecran,&continuer,&screen,son_bouton,police,gris);
+        	 }
+                else if(event.key.keysym.sym==SDLK_q)
+                {
+                    bouton(new_game,option,Load,exit1,ecran,&pos,&pos1,&pos2,&pos3);
+                    continuer = 0;
                 }
                 break;
             case SDL_MOUSEBUTTONDOWN:
