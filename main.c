@@ -28,7 +28,7 @@ int main(){
     theme=Mix_LoadMUS("assets/music/music.mp3");
     son_bouton=Mix_LoadWAV("assets/music/son_bouton.wav");
     Mix_PlayMusic(theme,1);
-    int continuer = 1,screen=1;
+    int continuer = 1,screen=1,load=0;
     
     new_game=IMG_Load("assets/bouton/new_game.png");
     new_game1=IMG_Load("assets/bouton/new_game1.png");
@@ -89,7 +89,8 @@ int main(){
             	if((x>450)&&(x<750)&&(y>250)&&(y<300)){
 		    menu_newgame(ecran,&continuer,son_bouton);
             	}
-            	else if((x>450)&&(x<750)&&(y>350)&&(y<400)){
+            	else if((x>450)&&(x<750)&&(y>350)&&(y<400)&&(load)){
+            	    //load
             	    continue;
             	}
             	else if((x>450)&&(x<750)&&(y>450)&&(y<500)){
