@@ -12,14 +12,17 @@
 
 int main(){
     
-    SDL_Surface *ecran=NULL, *text=NULL, *back=NULL, *back1=NULL, *new_game=NULL, *new_game1=NULL ;
-    SDL_Surface *option=NULL, *option1=NULL,  *exit=NULL, *exit1=NULL,  *Load=NULL, *Load1=NULL;
+    SDL_Surface *ecran=NULL, *text=NULL, *back=NULL,*new_game0=NULL, *new_game=NULL, *new_game1=NULL ;
+    SDL_Surface *option0=NULL,*option=NULL, *option1=NULL,*exit0=NULL,*exit=NULL, *exit1=NULL,*Load0=NULL,*Load=NULL, *Load1=NULL;
     SDL_Rect positionFond,pos,pos1,pos2,pos3,pos_title;
     Mix_Music *theme=NULL;
     Mix_Chunk *son_bouton=NULL;
     SDL_Color gris={100, 100, 100};
     TTF_Font *police=NULL;
     SDL_Event event;
+    
+    const int fps=60;
+    Uint32 start;
     
     initialisation();
     
@@ -39,6 +42,10 @@ int main(){
     exit=IMG_Load("assets/bouton/exit.png");
     exit1=IMG_Load("assets/bouton/exit1.png");
 
+    new_game0=new_game;
+    option0=option;
+    Load0=Load;
+    exit0=exit;
     
     positionFond.x = 0;
     positionFond.y = 0;
@@ -58,14 +65,20 @@ int main(){
     text=TTF_RenderText_Blended(police,"Mala  Jeux",gris);
 
     int i=0,x,y;
+    
+    
+    
     while(continuer){
+        start=SDL_GetTicks();
         animation_background(&i,back,ecran,&positionFond);
+        SDL_BlitSurface(text,NULL,ecran,&pos_title);
+        bouton(new_game0,option0,Load0,exit0,ecran,&pos,&pos1,&pos2,&pos3);
     	SDL_PollEvent(&event);
     	switch(event.type){
             case SDL_QUIT:
             	continuer = 0;
             	break;
-            case SDL_KEYDOWN:
+            /*case SDL_KEYDOWN:
                 
                 if(event.key.keysym.sym==SDLK_j)
                 {
@@ -82,7 +95,7 @@ int main(){
                     bouton(new_game,option,Load,exit1,ecran,&pos,&pos1,&pos2,&pos3);
                     continuer = 0;
                 }
-                break;
+                break;*/
             case SDL_MOUSEBUTTONDOWN:
                 Mix_PlayChannel(1,son_bouton,0);
                 SDL_GetMouseState(&x,&y);
@@ -103,27 +116,48 @@ int main(){
             case SDL_MOUSEMOTION:
             	SDL_GetMouseState(&x,&y);
             	if((x>450)&&(x<750)&&(y>250)&&(y<300)){
-            	    bouton(new_game1,option,Load,exit,ecran,&pos,&pos1,&pos2,&pos3);
+            	    new_game0=new_game1;
+            	    option0=option;
+            	    Load0=Load;
+            	    exit0=exit;
             	}
             	else if((x>450)&&(x<750)&&(y>350)&&(y<400)){
-            	    bouton(new_game,option,Load1,exit,ecran,&pos,&pos1,&pos2,&pos3);
+            	    new_game0=new_game;
+            	    option0=option;
+            	    Load0=Load1;
+            	    exit0=exit;
+            	    
             	}
             	else if((x>450)&&(x<750)&&(y>450)&&(y<500)){
-            	    bouton(new_game,option1,Load,exit,ecran,&pos,&pos1,&pos2,&pos3);
+            	    new_game0=new_game;
+            	    option0=option1;
+            	    Load0=Load;
+            	    exit0=exit;
             	}
             	else if((x>450)&&(x<750)&&(y>550)&&(y<600)){
-            	    bouton(new_game,option,Load,exit1,ecran,&pos,&pos1,&pos2,&pos3);
+            	    new_game0=new_game;
+            	    option0=option;
+            	    Load0=Load;
+            	    exit0=exit1;
             	}
             	else{
-            	    bouton(new_game,option,Load,exit,ecran,&pos,&pos1,&pos2,&pos3);
+            	    new_game0=new_game;
+            	    option0=option;
+            	    Load0=Load;
+            	    exit0=exit;
             	}
-            	SDL_BlitSurface(text,NULL,ecran,&pos_title);
-            	SDL_Flip(ecran);
+            	
+            	
             	SDL_PollEvent(&event);
             	if(event.type==SDL_QUIT){
             	    continuer=0;
             	}
             	break;
+        }
+        SDL_Flip(ecran);
+        if(1000/fps>(SDL_GetTicks()-start)){
+            SDL_Delay(1000/fps-(SDL_GetTicks()-start));
+        
         }
         SDL_FreeSurface(back);
         i++;
@@ -133,6 +167,14 @@ int main(){
     SDL_FreeSurface(option);
     SDL_FreeSurface(Load);
     SDL_FreeSurface(exit);
+    SDL_FreeSurface(new_game1);
+    SDL_FreeSurface(option1);
+    SDL_FreeSurface(Load1);
+    SDL_FreeSurface(exit1);
+    /*SDL_FreeSurface(new_game0);
+    SDL_FreeSurface(option0);
+    SDL_FreeSurface(Load0);
+    SDL_FreeSurface(exit0);*/
     TTF_CloseFont(police);
     TTF_Quit();
     SDL_FreeSurface(ecran);
