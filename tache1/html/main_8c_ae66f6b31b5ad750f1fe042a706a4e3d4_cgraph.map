@@ -1,0 +1,11 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$PP_8c.html#a929664b87fb6288f8e2eb696a0bd2ccb" title="pour initialisier le mode de jeu (single ou multiplayer) on initialise la position initial..." alt="" coords="167,31,205,57"/>
+<area shape="rect" id="node5" href="$PP_8c.html#a9e39e2d357f18982e3ec80e8ee8e2401" title="pour faire le controle du personnage. " alt="" coords="104,107,268,133"/>
+<area shape="rect" id="node10" href="$PP_8c.html#a3fe04c57396598b16d78bd4065a8824d" title="pour remettre a zero tout les paramettre du jeu apres boucle de jeu. " alt="" coords="136,157,236,184"/>
+<area shape="rect" id="node3" href="$PP_8c.html#a06d4dad62654fc7399c91ef52e319c3c" title="pour initialisier un personnage principal ( cette fonction est inisialiser sur le Spritesheet de test..." alt="" coords="329,5,402,32"/>
+<area shape="rect" id="node4" href="$structScore.html#aa1e07a19fbd1cb60bd7358b64ffac283" title="Score::Score" alt="" coords="466,95,565,121"/>
+<area shape="rect" id="node6" href="$PP_8c.html#afc7631c9f2e3b0445fb7250a3dd6ddeb" title="pour animer le personnage principal en deplacent frame par frame. " alt="" coords="318,56,413,83"/>
+<area shape="rect" id="node7" href="$PP_8c.html#a23102f7e1f31031abb303525289bfb37" title="pour faire sauter le peronnage ( cette fonction est faite pour un saut de 5 frame )..." alt="" coords="342,157,389,184"/>
+<area shape="rect" id="node8" href="$PP_8c.html#a208324da218a8c45e7b72520166b910d" title="pour deplacer le personnage principal . " alt="" coords="463,171,568,197"/>
+<area shape="rect" id="node9" href="$PP_8c.html#a742fd43f3d683af543f04032cc7bf6d0" title="pour afficher le peronnage , les vies et le score sans screen flip . " alt="" coords="316,107,415,133"/>
+</map>
