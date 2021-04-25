@@ -209,34 +209,34 @@ void mouvement_personnage(Personnage_Principal tab_p[], SDL_Surface *screen,SDL_
 
     int i=0,j=0;
 
-    p[0].frame=0;
+    tab_p[0].frame=0;
     if(mode)
-        p[1].frame=0;
+        tab_p[1].frame=0;
     else
-	p[1].max_frame=0;
-    while((i<p[0].max_frame)||(j<p[1].max_frame)){
-	if(i<p[0].max_frame)
-            animerPerso(&p[0]);
-        if(p[0].jump){
-            saut(&p[0]);   
+	tab_p[1].max_frame=0;
+    while((i<tab_p[0].max_frame)||(j<tab_p[1].max_frame)){
+	if(i<tab_p[0].max_frame)
+            animerPerso(&tab_p[0]);
+        if(tab_p[0].jump){
+            saut(&tab_p[0]);   
         }
         else{
-            deplacerPerso(&p[0]) ;
+            deplacerPerso(&tab_p[0]) ;
         }
 	if(mode){
-	    if(j<p[1].max_frame)
-	        animerPerso(&p[1]);
-	    if(p[1].jump){
-            	saut(&p[1]);   
+	    if(j<tab_p[1].max_frame)
+	        animerPerso(&tab_p[1]);
+	    if(tab_p[1].jump){
+            	saut(&tab_p[1]);   
             }
             else{
-            	deplacerPerso(&p[1]) ;
+            	deplacerPerso(&tab_p[1]) ;
             }
 	}
         SDL_BlitSurface(background,NULL,screen,&position_bakcground);
-        afficherPerso(p[0],screen);
+        afficherPerso(tab_p[0],screen);
 	if(mode){
-            afficherPerso(p[1],screen);
+            afficherPerso(tab_p[1],screen);
 	}
         SDL_Flip(screen);
 

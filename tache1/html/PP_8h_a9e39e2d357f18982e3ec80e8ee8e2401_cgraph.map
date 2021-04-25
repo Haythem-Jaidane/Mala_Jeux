@@ -1,7 +1,0 @@
-<map id="mouvement_personnage" name="mouvement_personnage">
-<area shape="rect" id="node2" href="$PP_8c.html#afc7631c9f2e3b0445fb7250a3dd6ddeb" title="pour animer le personnage principal en deplacent frame par frame. " alt="" coords="219,5,314,32"/>
-<area shape="rect" id="node3" href="$PP_8c.html#a23102f7e1f31031abb303525289bfb37" title="pour faire sauter le peronnage ( cette fonction est faite pour un saut de 5 frame )..." alt="" coords="243,56,290,83"/>
-<area shape="rect" id="node4" href="$PP_8c.html#a208324da218a8c45e7b72520166b910d" title="pour deplacer le personnage principal . " alt="" coords="364,81,469,108"/>
-<area shape="rect" id="node5" href="$PP_8c.html#a742fd43f3d683af543f04032cc7bf6d0" title="pour afficher le peronnage , les vies et le score sans screen flip . " alt="" coords="217,157,316,184"/>
-<area shape="rect" id="node6" href="$structScore.html#aa1e07a19fbd1cb60bd7358b64ffac283" title="Score::Score" alt="" coords="367,157,466,184"/>
-</map>

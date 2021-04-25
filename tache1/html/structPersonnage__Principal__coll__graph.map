@@ -1,4 +1,0 @@
-<map id="Personnage_Principal" name="Personnage_Principal">
-<area shape="rect" id="node2" href="$structLife.html" title="structure pour l&#39;affichage les vies du joueur " alt="" coords="11,5,54,32"/>
-<area shape="rect" id="node3" href="$structScore.html" title="structure pour l&#39;affichage du score " alt="" coords="98,5,154,32"/>
-</map>
