@@ -1,0 +1,8 @@
+energie: L=0,04 po
+        H=0,13 po
+obst violet: L=0,27 po 
+             H=0,2 po
+cris jaune: L=0,28 po
+	    H=0,28 po
+fusée: L=0,62 po
+       H=1,11 po
