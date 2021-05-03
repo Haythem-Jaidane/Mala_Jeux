@@ -1,0 +1,12 @@
+energie : L=0,07p
+	  H=0,13p
+glacon  : L=0,35p
+	  H=0,18p
+fontaine : L=0,43p
+	   H=0,2p
+eau : L=0,81p
+      H=0,19p
+obstacle bleu : L=0,39p
+		H=0,35p
+fusée : L=0,62p
+	H=1,11p
