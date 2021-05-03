@@ -46,8 +46,8 @@ p->Score_perso.Score = TTF_RenderText_Blended(police,s, couleurBlanche);
 
 // LIFE :
 
-p->Vie_perso.Nbr_Life = 5 ;
-p->Vie_perso.Life_img = IMG_Load("vie/1.png");
+p->Vie_perso.Nbr_Life = 3 ;
+p->Vie_perso.Life_img = IMG_Load("vie/3.png");
 
 // SPRITE SHEET : 
 p->frame = 0 ;
@@ -82,9 +82,9 @@ void init (Personnage_Principal tab_p[], int mode){
     // single player
     initPerso(&tab_p[0]);
     tab_p[0].Position_intiale.x = 50 ;
-    tab_p[0].Position_intiale.y = 440 ;
+    tab_p[0].Position_intiale.y = 380 ;
     tab_p[0].Vie_perso.Position_life.x = 20;
-    tab_p[0].Vie_perso.Position_life.y = 80;
+    tab_p[0].Vie_perso.Position_life.y = 0;
     if(mode==0)
     	tab_p[0].Score_perso.Position_score.x = 1000 ;
     else
@@ -130,18 +130,26 @@ void afficherPerso(Personnage_Principal p , SDL_Surface *screen)
 * @return Nothing 
 */ 
 
-void deplacerPerso(Personnage_Principal *p)
+void deplacerPerso(Personnage_Principal *p,SDL_Surface *mask)
 {
 
     if(((p->Position_intiale.x<p->limite_max-10)&&(p->Direction==1))||((p->Position_intiale.x>p->limite_min)&&(p->Direction==2))){
         switch (p->Direction){
             case 1 :
-		//if (collision_parfaite_left(mask,p->Position_intiale)==0){
-                    p->Position_intiale.x += 7*p->acceleration ;
-		//}
+		if (collision_parfaite_left(mask,p->Position_intiale)==1){
+		   p->Position_intiale.x -= 5;
+		}
+		else{
+		   p->Position_intiale.x += 20*p->acceleration ;
+		}
                 break ;
             case 2 :
-                p->Position_intiale.x -= 7*p->acceleration ;
+                if (collision_parfaite_right(mask,p->Position_intiale)==1){
+		   p->Position_intiale.x += 5;
+		}
+		else{
+		   p->Position_intiale.x -= 20*p->acceleration ;
+		}
                 break ;
         }
     }
@@ -176,21 +184,22 @@ void animerPerso(Personnage_Principal*p)
 * @return Nothing 
 */ 
 
-void saut(Personnage_Principal *p){
+void saut(Personnage_Principal *p,SDL_Surface *mask){
 
     // saut
     if(p->frame==1 || p->frame == 2)
     {
-        p->Position_intiale.y -= 30;
+	if(collision_parfaite_up(mask,p->Position_intiale)==0)
+            p->Position_intiale.y -= 50;
     }
     // chute
     else if(p->frame==3 || p->frame == 4)
     {
-        
-        p->Position_intiale.y += 30;
+	if(collision_parfaite_down(mask,p->Position_intiale)==0)       
+            p->Position_intiale.y += 50;
     }
     if(p->Direction>0){
-        deplacerPerso(p);
+        deplacerPerso(p,mask);
     }
     p->jump=1;
 }
@@ -212,7 +221,7 @@ void saut(Personnage_Principal *p){
 
 void mouvement_personnage(Personnage_Principal tab_p[], SDL_Surface *screen,SDL_Surface *background,SDL_Rect position_bakcground,int mode){
 
-    int i=0,j=0;
+    /*int i=0,j=0;
 
     tab_p[0].frame=0;
     if(mode)
@@ -248,7 +257,7 @@ void mouvement_personnage(Personnage_Principal tab_p[], SDL_Surface *screen,SDL_
 	i++;
         j++;
 
-    }
+    }*/
 
 }
 

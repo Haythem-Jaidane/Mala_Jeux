@@ -28,7 +28,7 @@
 void initialiser_ennemy(Ennemy *e,char *file_name)
 {
 e->pos.x=780;
-e->pos.y=440;
+e->pos.y=380;
 e->frame=0;
 e->sprite=IMG_Load(file_name);
 }
@@ -108,10 +108,10 @@ a=rand()%1000;*/
 
 void deplacement(Ennemy *e,int *sp,int *x,SDL_Surface *screen)
 {
-	//Sprit(e,&(*sp));
+	Sprit(e,&(*sp));
 if(*x==1)
 	{
-		if(e->pos.x<900)
+		if(e->pos.x<1000)
 		{
 			e->pos.x+=10;
 			*sp=200; //200
@@ -148,10 +148,10 @@ if(e->pos.x>0)
 */
 int collision(box *b,Ennemy *e)
 {
-	b->x=698;
-	b->y=600;
-	b->w=60;
-	b->h=75;
+	b->x=400;
+	b->y=400;
+	b->w=200;
+	b->h=100;
 
 
 	if(e->pos.x>b->x+b->w || b->x > e->pos.x+e->pos.w || b->y + b->h < e->pos.y || b->y > e->pos.y + e->pos.h)

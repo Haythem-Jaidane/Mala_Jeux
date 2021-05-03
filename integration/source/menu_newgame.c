@@ -21,7 +21,7 @@ void affichage_button(){
 
 void single_player(SDL_Surface *ecran,Mix_Chunk *son,TTF_Font *police,SDL_Color color,int *continuer)
 {
-SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , *easy1=NULL , *medium1=NULL  , *newgame1=NULL , *hard=NULL , *hard1=NULL ,*mask=NULL;
+SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , *easy1=NULL , *medium1=NULL  , *newgame1=NULL , *hard=NULL , *hard1=NULL ,*mask=NULL,*easy0=NULL , *medium0=NULL,*hard0=NULL;
     SDL_Rect pos , easy_pos , medium_pos , hard_pos , singleplayer_pos ;
     SDL_Event event;
     int s=1,x,y;
@@ -35,6 +35,7 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
     Objet map,wood,boat,map2,failed,perso;
     Ennemy e;
     box b;
+    mask=IMG_Load("stage1Mask.bmp");
 
     p[0].limite_min=0;
     p[0].limite_max=1024/2;
@@ -48,7 +49,7 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
     hard1=IMG_Load("assets/bouton/hard1.png");
     //singleplayer=TTF_RenderText_Blended(police,"Single Game",color);
 
-    mask=IMG_Load("mask.png");
+    mask=SDL_LoadBMP("stage1Mask.bmp");
     
     pos.x=0;
     pos.y=0;
@@ -92,6 +93,8 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
 
   			switch (event.type){
   				case SDL_QUIT:
+				     s=0;
+   	        		     *continuer=0;
     				     level = 0;
     				     break;
   				case SDL_KEYDOWN:
@@ -100,10 +103,10 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
 
     						if(keystate[SDLK_RIGHT]){ // Flèche droite
 							
-							//if(p[0].Position_intiale.x==p[0].limite_max-60){
+							if(p[0].Position_intiale.x>p[0].limite_max-50){
       							    scrolling_droit(ecran, &map2, &pos, &boat);
-							    //p[0].Position_intiale.x-10;
-							//}
+							    p[0].Position_intiale.x=p[0].Position_intiale.x-10;
+							}
 							p[0].Direction=1;
 			        			p[0].max_frame=8;
 		                			p[0].Mouvement=1;
@@ -122,6 +125,9 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
 			        			p[0].max_frame=7;
                                 			p[0].Mouvement=3;
 			    			}
+						if(keystate[SDLK_SPACE]){
+			        			p[0].acceleration = 2;
+			    			}
   
     					break;
   				}
@@ -132,16 +138,24 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
 						if(i<p[0].max_frame){
             						animerPerso(&p[0]);
         						if(p[0].jump){
-            						    saut(&p[0]);   
+            						    saut(&p[0],mask);   
         						}
-        						else if(p[0].Position_intiale.x!=300-map.pos.x){
-            						    deplacerPerso(&p[0]) ;
+        						else{
+            						    deplacerPerso(&p[0],mask) ;
         						}
 						}
         					affichage(ecran, &boat, &wood, &map, &map2,&perso);
-						animation(&e,ecran);
-						deplacement(&e,&sp,&r,ecran);
-                                                afficher(&e,ecran);
+						if((map2.pos.x+1219>2000)&&(map2.pos.x<2400)){
+						    if((collision_parfaite_right(mask,e.pos)==1)||(collision_parfaite_left(mask,e.pos)==1)){
+							if(r==1)
+							    r=-1;
+							else
+							    r=1;
+						    }
+						    animation(&e,ecran);
+						    deplacement(&e,&sp,&r,ecran);
+                                                    afficher(&e,ecran);
+						}
         					afficherPerso(p[0],ecran);
         					SDL_Flip(ecran);
 						
@@ -153,38 +167,41 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
    	    case SDL_MOUSEMOTION:
    	        SDL_GetMouseState(&x,&y);
    	         if((x>450)&&(x<750)&&(y>250)&&(y<300)){
-   	            SDL_BlitSurface(easy1,NULL,ecran,&easy_pos);
-   	            SDL_BlitSurface(medium,NULL,ecran,&medium_pos);
-   	            SDL_BlitSurface(hard,NULL,ecran,&hard_pos);
+   	            easy0=easy1;
+		    medium0=medium;
+		    hard0=hard;
    	        }
    	        else if((x>450)&&(x<750)&&(y>350)&&(y<400)){
-   	            SDL_BlitSurface(easy,NULL,ecran,&easy_pos);
-   	            SDL_BlitSurface(medium1,NULL,ecran,&medium_pos);
-   	            SDL_BlitSurface(hard,NULL,ecran,&hard_pos);
+   	            easy0=easy;
+		    medium0=medium1;
+		    hard0=hard;
    	        }
    	        else if((x>450)&&(x<750)&&(y>450)&&(y<500)){
-   	            SDL_BlitSurface(easy,NULL,ecran,&easy_pos);
-   	            SDL_BlitSurface(medium,NULL,ecran,&medium_pos);
-   	            SDL_BlitSurface(hard1,NULL,ecran,&hard_pos);
+   	            easy0=easy;
+		    medium0=medium;
+		    hard0=hard1;
    	        }
    	        else{
-   	            SDL_BlitSurface(easy,NULL,ecran,&easy_pos);
-   	            SDL_BlitSurface(medium,NULL,ecran,&medium_pos);
-   	            SDL_BlitSurface(hard,NULL,ecran,&hard_pos);
+		    easy0=easy;
+		    medium0=medium;
+		    hard0=hard;
    	        }
 		
    	        break;
    	    
    	}
+   	SDL_BlitSurface(easy0,NULL,ecran,&easy_pos);
+   	SDL_BlitSurface(medium0,NULL,ecran,&medium_pos);
+   	SDL_BlitSurface(hard0,NULL,ecran,&hard_pos);
    	SDL_Flip(ecran);
    }
-   /*SDL_FreeSurface(background);
+   SDL_FreeSurface(background);
    SDL_FreeSurface(easy);
    SDL_FreeSurface(easy1);
    SDL_FreeSurface(medium);
    SDL_FreeSurface(medium1);
    SDL_FreeSurface(hard);
-   SDL_FreeSurface(hard1);*/
+   SDL_FreeSurface(hard1);
 
 
 }

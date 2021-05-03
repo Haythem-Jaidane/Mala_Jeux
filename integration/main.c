@@ -71,6 +71,10 @@ int main(){
     int i=0,x,y;
     int level=0;
 
+    SDL_FillRect(ecran, NULL,SDL_MapRGB(ecran->format, 0, 0, 0));
+    SDL_Flip(ecran);
+    SDL_Delay(1000);
+
     // Cinematique //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     for(i=1;i<9;i++){
 
@@ -88,7 +92,9 @@ int main(){
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     SDL_FreeSurface(cinematique);
-    SDL_Delay(500);
+    SDL_FillRect(ecran, NULL,SDL_MapRGB(ecran->format, 0, 0, 0));
+    SDL_Flip(ecran);
+    SDL_Delay(2000);
 
     while(continuer){
         start=SDL_GetTicks();

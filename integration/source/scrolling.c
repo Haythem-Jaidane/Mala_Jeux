@@ -67,7 +67,7 @@ void setup(SDL_Surface *screen, Objet *map, Objet *wood, Objet *boat, Objet *map
 {
   SDL_Rect pos1,pos2 ;
  pos1.x=0 ;
- pos1.y=0 ;
+ pos1.y=60 ;
 
  pos2.x=1360/2 ;
  pos2.y=0 ;
@@ -97,11 +97,11 @@ void affichage(SDL_Surface *screen, Objet *boat, Objet *wood, Objet *map, Objet 
 {
    SDL_Rect pos1,pos2 ;
  pos1.x=0 ;
- pos1.y=60 ;
+ pos1.y=0 ;
 
  pos2.x=1360/2 ;
  pos2.y=0 ;
-  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 255, 255, 255));
+  SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));
 
   //SDL_BlitSurface(map->img, &(map->pos), screen, &pos2);
   SDL_BlitSurface(map2->img, &(map2->pos), screen,&pos1);
