@@ -43,6 +43,8 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
     minimap m;
     enigme  en;
 
+    srand(time(NULL));
+
     SDL_Rect camera;
     camera.x=0;
     camera.y=0;
