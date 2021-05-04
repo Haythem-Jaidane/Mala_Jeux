@@ -75,9 +75,9 @@ int jump;/*!< la variable du saut 1 ou 0*/
 void initPerso(Personnage_Principal*p) ;
 void init (Personnage_Principal tab_p[], int mode);
 void afficherPerso(Personnage_Principal p , SDL_Surface *screen);
-void deplacerPerso(Personnage_Principal *p,SDL_Surface *mask);
+void deplacerPerso(Personnage_Principal *p,SDL_Surface *mask,SDL_Rect map);
 void animerPerso(Personnage_Principal *p) ;
-void saut(Personnage_Principal *p,SDL_Surface *mask) ;
+void saut(Personnage_Principal *p,SDL_Surface *mask,SDL_Rect map) ;
 void mouvement_personnage(Personnage_Principal tab_p[], SDL_Surface *screen,SDL_Surface *background,SDL_Rect position_bakcground,int mode);
 void remis_a_zero(Personnage_Principal tab_p[],int mode);
 

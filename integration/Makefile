@@ -1,5 +1,5 @@
-jeux: menu_principal.o menu_option.o menu_newgame.o PP.o scrolling.o fml.o collision.o main.o
-	gcc main.o menu_principal.o menu_option.o menu_newgame.o PP.o scrolling.o fml.o collision.o -o jeux -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
+jeux: menu_principal.o menu_option.o menu_newgame.o PP.o scrolling.o fml.o collision.o minimap.o temps.o enig.o main.o
+	gcc main.o menu_principal.o menu_option.o menu_newgame.o PP.o scrolling.o fml.o collision.o minimap.o temps.o enig.o -o jeux -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
 main.o: main.c
 	gcc -c main.c -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
 menu_principal.o: source/menu_principal.c
@@ -16,3 +16,9 @@ fml.o: source/fml.c
 	gcc -c source/fml.c -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
 collision.o: source/collision.c
 	gcc -c source/collision.c -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
+minimap.o: source/minimap.c
+	gcc -c source/minimap.c -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
+temps.o: source/temps.c
+	gcc -c source/temps.c -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf
+enig.o: source/enig.c
+	gcc -c source/enig.c -g -lSDL -lSDL_image -lSDL_mixer -lSDL_ttf

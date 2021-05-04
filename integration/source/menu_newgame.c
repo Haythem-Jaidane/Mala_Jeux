@@ -10,6 +10,9 @@
 #include "../header/PP.h"
 #include "../header/fml.h"
 #include "../header/collision.h"
+#include "../header/minimap.h"
+#include "../header/temps.h"
+#include "../header/enig.h"
 
 /*void affichage(){
 
@@ -30,12 +33,24 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
 
     int r=1;
     int sp=200;
+    char image[30]="";
+    int alea,running=1,so,si;
 
     Personnage_Principal p[2];
     Objet map,wood,boat,map2,failed,perso;
     Ennemy e;
     box b;
+    minimap m;
+    enigme  en;
+
+    SDL_Rect camera;
+    camera.x=0;
+    camera.y=0;
+    camera.w=1300;
+    camera.h=700;
+
     mask=IMG_Load("stage1Mask.bmp");
+    init_map (&m);
 
     p[0].limite_min=0;
     p[0].limite_max=1024/2;
@@ -59,6 +74,8 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
     medium_pos.y = 350;
     hard_pos.x = 470;
     hard_pos.y = 450;
+
+    temps t;
     
     while(s){
         SDL_BlitSurface(background,NULL,ecran,&pos);
@@ -83,6 +100,8 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
 		init(p,0);
 		initialiser_ennemy(&e,"2.png");
 		initialiser (&perso,&map ,&wood ,&boat,&map2,&failed) ;
+		initialiser_temps(&t);
+                init_enigme(&en);
   		setup (ecran,&map ,&wood,&boat,&map2,&perso) ;
 		afficherPerso(p[0],ecran);
 		SDL_Flip(ecran);
@@ -131,20 +150,56 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
   
     					break;
   				}
+				if(map2.pos.x>3800){
+				    generate_afficher ( ecran  , image ,&en,&alea) ;
+
+
+      				    s=solution_e (image );
+				    do{
+					r=resolution (&running,&s);
+				    }while((r>3 || r<1) && running!=0) ;
+
+
+      				while(running){
+
+				afficher_resultat (ecran,so,si,&en) ;
+			       	SDL_WaitEvent(&event);
+                     		switch(event.type)
+                       		{
+					     case SDL_QUIT :
+                              			      running =0 ;
+						      s=0;
+   	        		     		      *continuer=0;
+    				                      level = 0;
+					              break ;
+                                              case SDL_KEYDOWN :
+
+                             			switch( event.key.keysym.sym )
+                                  		{
+			                        case  SDLK_ESCAPE:
+			                           running= 0 ;
+			                           break ;
+			                         }
+						 break ;
+                                 }
+                                }
+                            }
+				
 				int i=0;
 					p[0].frame=0;
-					Sprit(&e,&sp);
     					while(i<p[0].max_frame){
 						if(i<p[0].max_frame){
             						animerPerso(&p[0]);
         						if(p[0].jump){
-            						    saut(&p[0],mask);   
+            						    saut(&p[0],mask,map2.pos);   
         						}
         						else{
-            						    deplacerPerso(&p[0],mask) ;
+            						    deplacerPerso(&p[0],mask,map2.pos) ;
         						}
 						}
         					affichage(ecran, &boat, &wood, &map, &map2,&perso);
+						afficherminimap(m,ecran,&camera);
+						afficher_temps(&t, ecran);
 						if((map2.pos.x+1219>2000)&&(map2.pos.x<2400)){
 						    if((collision_parfaite_right(mask,e.pos)==1)||(collision_parfaite_left(mask,e.pos)==1)){
 							if(r==1)
@@ -157,6 +212,8 @@ SDL_Surface *background=NULL , *easy=NULL , *medium=NULL  ,*singleplayer=NULL , 
                                                     afficher(&e,ecran);
 						}
         					afficherPerso(p[0],ecran);
+						MAJMinimap(p[0].Position_intiale ,&m, camera, 20);
+						
         					SDL_Flip(ecran);
 						
 						i++;
@@ -251,7 +308,6 @@ void menu_newgame(SDL_Surface *ecran,int *continuer,Mix_Chunk *son,TTF_Font *pol
    	        Mix_PlayChannel(1,son,0);
    	        SDL_GetMouseState(&x,&y);
               	if((x>450)&&(x<750)&&(y>250)&&(y<300)){
-		    printf("7");
    	            single_player(ecran,son,police,color,continuer);
    	        }
    	        else if((x>450)&&(x<750)&&(y>4350)&&(y<400)){

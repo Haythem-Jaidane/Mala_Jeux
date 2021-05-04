@@ -61,12 +61,12 @@ int main(){
     pos1.y = 450;
     pos3.x = 470;
     pos3.y = 550;
-    pos_title.x=410;
+    pos_title.x=300;
     pos_title.y=100;
 
 
     police=TTF_OpenFont("assets/fonts/Monoton/Monoton-Regular.ttf",64);
-    text=TTF_RenderText_Blended(police,"Mala  Jeux",gris);
+    text=TTF_RenderText_Blended(police,"Lost in the Void",gris);
 
     int i=0,x,y;
     int level=0;

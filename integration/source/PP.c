@@ -130,26 +130,26 @@ void afficherPerso(Personnage_Principal p , SDL_Surface *screen)
 * @return Nothing 
 */ 
 
-void deplacerPerso(Personnage_Principal *p,SDL_Surface *mask)
+void deplacerPerso(Personnage_Principal *p,SDL_Surface *mask,SDL_Rect map)
 {
 
-    if(((p->Position_intiale.x<p->limite_max-10)&&(p->Direction==1))||((p->Position_intiale.x>p->limite_min)&&(p->Direction==2))){
+    if(((p->Position_intiale.x<p->limite_max-10)&&(p->Direction==1))||((p->Position_intiale.x>p->limite_min)&&(p->Direction==2))||((map.x>3800)&&(p->Position_intiale.x<1100))){
         switch (p->Direction){
             case 1 :
-		if (collision_parfaite_left(mask,p->Position_intiale)==1){
+		/*if (collision_parfaite_left(mask,p->Position_intiale)==1){
 		   p->Position_intiale.x -= 5;
 		}
-		else{
+		else{*/
 		   p->Position_intiale.x += 20*p->acceleration ;
-		}
+		//}
                 break ;
             case 2 :
-                if (collision_parfaite_right(mask,p->Position_intiale)==1){
+                /*if (collision_parfaite_right(mask,p->Position_intiale)==1){
 		   p->Position_intiale.x += 5;
 		}
-		else{
+		else{*/
 		   p->Position_intiale.x -= 20*p->acceleration ;
-		}
+		//}
                 break ;
         }
     }
@@ -184,22 +184,22 @@ void animerPerso(Personnage_Principal*p)
 * @return Nothing 
 */ 
 
-void saut(Personnage_Principal *p,SDL_Surface *mask){
+void saut(Personnage_Principal *p,SDL_Surface *mask,SDL_Rect map){
 
     // saut
     if(p->frame==1 || p->frame == 2)
     {
-	if(collision_parfaite_up(mask,p->Position_intiale)==0)
+	//if(collision_parfaite_up(mask,p->Position_intiale)==0)
             p->Position_intiale.y -= 50;
     }
     // chute
     else if(p->frame==3 || p->frame == 4)
     {
-	if(collision_parfaite_down(mask,p->Position_intiale)==0)       
+	//if(collision_parfaite_down(mask,p->Position_intiale)==0)       
             p->Position_intiale.y += 50;
     }
     if(p->Direction>0){
-        deplacerPerso(p,mask);
+        deplacerPerso(p,mask, map);
     }
     p->jump=1;
 }
